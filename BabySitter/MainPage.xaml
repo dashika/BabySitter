@@ -1,0 +1,293 @@
+﻿<Page
+    x:Class="BabySitter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BabySitter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    xmlns:promo="using:AppPromo"
+    mc:Ignorable="d"  RequestedTheme="Dark" Background="Black" FontSize="16" FontWeight="Bold" 
+    >
+
+    <Grid >
+
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/626501-1680x1050.jpg" Opacity="0.4"/>
+        </Grid.Background>
+        <promo:RateReminder Name="RateReminder" />
+
+        <Hub >
+            <Hub.Header>
+                <!-- Кнопка "Назад" и заголовок страницы -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="BabySitter" Style="{StaticResource HeaderTextBlockStyle}"   VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" FontSize="40" />
+                    <TextBlock x:Name="childName"  FontSize="20" Grid.Column="1"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Hub.Header>
+            <HubSection>
+                <HubSection.Background>
+                    <ImageBrush ImageSource="Assets/358981-1680x1050.jpg" Stretch="UniformToFill" />
+                </HubSection.Background>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="50" />
+                            <RowDefinition Height="210" />
+                            <RowDefinition Height="80" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*"  />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker x:Name="date" Grid.Row="2" Background="#FF646060" Foreground="White" BorderThickness="1" FontSize="24" DateChanged="date_DateChanged"/>
+                        <Button Name="Favorite" Grid.Row="3" Content="Любимое" Height="50" Width="200"  HorizontalAlignment="Center"  BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" Click="Favorite_Click" />
+                        <Button Name="Contact" Grid.Row="4" Content="Контакты" Width="200" Height="50"  HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" Click="Contact_Click"></Button>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <Button Name="Add"  Content="Добавить" Width="100" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#4C000000" Click="Add_Click"></Button>
+                        <Button Name="Delete" Content="Удалить" Width="10" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#4C000000" Click="Del_Click"></Button>
+                       <Button Name="UpdChild" Content="Изменить" Width="140" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#4C000000" Click="Upd_Click"></Button>
+                       </StackPanel>
+                        <Button Name="Update" Grid.Row="5" Content="Обновить" Width="200" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" Click="Update_Click"></Button>
+
+                        <ListBox Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="300"  ItemsSource="{Binding MyListChild}" SelectionChanged="ListView_SelectionChanged_3" Background="{x:Null}" BorderBrush="{x:Null}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#7FEA2F2F" BorderThickness="2">
+                                        <Grid Background="{x:Null}" Width="280">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition  Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="100" ></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding name}" Margin="10" Grid.Column="0" Grid.Row="0" FontSize="20" />
+                                            <TextBlock Text="{Binding birthday}" Width="79"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" FontSize="14" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <!--  НАПОМИНАНИЯ -->
+            <HubSection Width="400" x:Uid="Section1Header" Header="Напоминания" >
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                            <StackPanel.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#CCE676AE" Offset="0"/>
+                                    <GradientStop Color="#68E676AE" Offset="1"/>
+                                </LinearGradientBrush>
+                            </StackPanel.Background>
+                            <TextBlock Text="Назначение" Margin="10" FontSize="14" Width="130"  />
+                            <TextBlock Text="Дата и время" Margin="10" FontSize="14" Width="100" />
+                            <Button Name="AddRem" Content="Добавить"  BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" HorizontalAlignment="Right" Click="AddRem_Click"></Button>
+                        </StackPanel>
+                        <ListView Grid.Row="1" HorizontalAlignment="Left" MinHeight="200"  VerticalAlignment="Top" Width="400"  ItemsSource="{Binding MyListReminder}" SelectionChanged="ListView_SelectionChanged_1">
+                            <ListView.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="2.161"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#99E676AE" Offset="0"/>
+                                    <GradientStop Color="#7F000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ListView.Background>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#7FEA2F2F" BorderThickness="2">
+                                        <Grid Background="{x:Null}" Width="370">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition  Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*" ></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding stype}" Margin="10" Grid.Column="0" Grid.Row="0" FontSize="20" />
+                                            <TextBlock Text="{Binding dateTime}" Margin="20" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" FontSize="14" />
+                                            <TextBlock Text="{Binding other}" Margin="10"  Grid.ColumnSpan="2" Grid.Row="1" FontStyle="Italic" FontSize="20"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <!-- ЗАДАНИЯ -->
+            <HubSection Width="400" x:Uid="Section1Header" Header="Задания">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                            <StackPanel.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#CCDCE676" Offset="0"/>
+                                    <GradientStop Color="#68DCE676" Offset="1"/>
+                                </LinearGradientBrush>
+                            </StackPanel.Background>
+                            <TextBlock Text="Название" Margin="10" FontSize="14" Width="110"  />
+                            <TextBlock Text="Дата и время" Margin="10" FontSize="14" Width="120"/>
+                            <Button Name="AddTask" Content="Добавить"  BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" HorizontalAlignment="Right" Click="AddRem_Click_1"></Button>
+                        </StackPanel>
+                        <ListView Grid.Row="1" HorizontalAlignment="Left" MinHeight="200"  VerticalAlignment="Top" Width="400"  ItemsSource="{Binding MyListTask}" SelectionChanged="ListView_SelectionChanged_2">
+                            <ListView.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="2.161"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#99DCE676" Offset="0.004"/>
+                                    <GradientStop Color="#66000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ListView.Background>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#7FEA2F2F" BorderThickness="2">
+                                        <Grid Background="{x:Null}" Width="370">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" ></ColumnDefinition>
+                                                <ColumnDefinition Width="*" ></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding name}" Margin="10"  Grid.Column="0" Grid.Row="0" FontSize="20" />
+                                            <TextBlock Text="{Binding dateTime}" Margin="10"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" FontSize="14"/>
+                                            <TextBlock Text="{Binding other}" Margin="10"  Grid.ColumnSpan="2" Grid.Row="1" FontSize="20"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <!-- EVERYDAY  -->
+            <HubSection Width="400" x:Uid="Section1Header" Header="Ежедневные данные">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                            <StackPanel.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#A576AEE6" Offset="0"/>
+                                    <GradientStop Color="#6876AEE6" Offset="1"/>
+                                </LinearGradientBrush>
+                            </StackPanel.Background>
+                            <TextBlock Text="Рост" Margin="10" FontSize="14" Width="50"  />
+                            <TextBlock Text="Вес" Margin="10" FontSize="14" Width="50"/>
+                            <TextBlock Text="Температура" Margin="10" FontSize="14" Width="110"/>
+                            <Button Name="AddRem" Content="Добавить"  BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" HorizontalAlignment="Right" Click="AddRem_Click_2"></Button>
+                        </StackPanel>
+                        <ListView Grid.Row="1" HorizontalAlignment="Left" MinHeight="200"  VerticalAlignment="Top" Width="Auto" MinWidth="400"  ItemsSource="{Binding MyListEveryDay}" SelectionChanged="ListView_SelectionChanged">
+                            <ListView.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="2.161"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#9976AEE6" Offset="0"/>
+                                    <GradientStop Color="#26131313" Offset="1"/>
+                                </LinearGradientBrush>
+                            </ListView.Background>
+                            <ListView.ItemTemplate >
+                                <DataTemplate>
+                                    <Border BorderBrush="#7FEA2F2F" BorderThickness="2">
+                                        <Grid Background="{x:Null}" Width="370">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition MinWidth="50" Width="70"></ColumnDefinition>
+                                                <ColumnDefinition MinWidth="50" Width="70"></ColumnDefinition>
+                                                <ColumnDefinition MinWidth="100"></ColumnDefinition>
+                                                <ColumnDefinition MinWidth="100"></ColumnDefinition>
+                                                <ColumnDefinition MinWidth="10"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding heiht}" Margin="10"  Grid.Column="0" Grid.Row="0" FontSize="20" />
+                                            <TextBlock Text="{Binding weight}" Margin="10"  Grid.Column="1" Grid.Row="0" FontSize="20"/>
+                                            <TextBlock Text="{Binding temperature}" Margin="10"  Grid.Column="2" Grid.Row="0" FontSize="20"/>
+
+
+                                            <Grid Grid.Row="1" Grid.ColumnSpan="4">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MinWidth="100" ></ColumnDefinition>
+                                                    <ColumnDefinition MinWidth="300" ></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Text="Вздутие животика : " Margin="10" FontSize="14" Grid.Column="0" Grid.Row="0" />
+                                                <ProgressBar Value="{Binding abdominalDistention}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="0"/>
+
+
+                                                <TextBlock Text="Высыпания" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="1"/>
+                                                <ProgressBar Value="{Binding rashes}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="1"/>
+
+                                                <TextBlock Text="Плакучесть" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="2"/>
+                                                <ProgressBar Value="{Binding crying}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="2"/>
+
+                                                <TextBlock Text="Игривость" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="3"/>
+                                                <ProgressBar Value="{Binding playing}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="3"/>
+
+                                                <TextBlock Text="Запор" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="4"/>
+                                                <ProgressBar Value="{Binding locking}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="4"/>
+
+                                                <TextBlock Text="Газы" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="5"/>
+                                                <ProgressBar Value="{Binding gas}" Height="5" Maximum="5" Width="200" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="5"/>
+
+                                                <TextBlock Text="Диарея" Margin="10" FontSize="14" Grid.Column="0" Grid.Row="6"/>
+                                                <ProgressBar Value="{Binding diareya}" Maximum="5" Width="200" Height="5" Minimum="0" Margin="10" Grid.Column="1" Grid.Row="6"/>
+
+                                                <TextBlock Text="{Binding description}" Margin="10" Grid.ColumnSpan="2" Grid.Row="7" />
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
+    </Grid>
+</Page>

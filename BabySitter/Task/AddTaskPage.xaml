@@ -1,0 +1,63 @@
+﻿<Page xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
+    x:Class="BabySitter.AddTaskPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BabySitter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:map="using:MapControl"
+    RequestedTheme="Dark" FontSize="14" FontWeight="Bold" Background="Black">
+
+    <Grid Margin="5">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/626501-1680x1050.jpg" Opacity="0.44"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" ></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Style="{StaticResource PreviousAppBarButtonStyle}" Grid.Row="0" Grid.Column="0" Click="Button_Click"></Button>
+        <TextBlock x:Name="pageTitle" x:Uid="Header" Text="BabySitter" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+
+        <Button Name="Add" Content="Добавить" Height="50" Width="200" Margin="10" Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="#7FEA2F2F" Background="#7F000000" Foreground="White" Click="Add_Click" />
+
+        <ListView SelectionMode="None" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" >
+
+            <Border Margin="5">
+                <Grid VerticalAlignment="Center" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition  Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition MinWidth="270" Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Дата и время" Grid.Column="0" Grid.Row="1"></TextBlock>
+                    <DatePicker x:Name="date" Grid.Column="1" Grid.Row="1" Margin="0,0,0,5"></DatePicker>
+                    <TimePicker x:Name="time" Grid.Column="1" Grid.Row="2"></TimePicker>
+                    <TextBlock Text="Описание" Grid.Column="0" Grid.Row="4" ></TextBlock>
+                    <RichEditBox x:Name="description" Grid.Column="1" Grid.Row="4" MinHeight="75" Margin="0,5,0,5"></RichEditBox>
+                    <TextBlock Text="Название" Grid.Column="0"  Grid.Row="3"></TextBlock>
+                    <TextBox x:Name="name" Grid.Column="1"  Grid.Row="3" />
+                </Grid>
+            </Border>
+        </ListView>
+    </Grid>
+</Page>
